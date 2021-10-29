@@ -1,0 +1,5 @@
+stow zsh
+stow urxvt 
+stow awesome_red
+sudo stow udev -t /
+sudo stow xorg.conf.d -t /

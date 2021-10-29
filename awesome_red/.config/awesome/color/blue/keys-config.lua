@@ -102,9 +102,16 @@ local function client_numkey(i, mod, action)
 	)
 end
 
--- brightness functions
+-- brightness control using custom script
+local brightness_control = {
+	increase = "~/.config/awesome/scripts/brightness.py --inc=%s",
+	decrease = "~/.config/awesome/scripts/brightness.py --dec=%s",
+}
+
+redflat.float.brightness.default_variant = brightness_control
+
 local brightness = function(args)
-	redflat.float.brightness:change_with_xbacklight(args) -- use xbacklight
+	redflat.float.brightness:change(args)
 end
 
 -- right bottom corner position

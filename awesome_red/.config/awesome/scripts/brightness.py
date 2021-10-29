@@ -4,10 +4,10 @@
 # Your system brightness file should be writable by user.
 
 from argparse import ArgumentParser
-
+from pathlib import Path
 # Brightness files location
-MAX_BRIGHTNESS_FILE = "/sys/class/backlight/%k/max_brightness"
-MAIN_BRIGHTNESS_FILE = "/sys/class/backlight/%k/brightness"
+MAX_BRIGHTNESS_FILE = "/sys/class/backlight/amdgpu_bl1/max_brightness"
+MAIN_BRIGHTNESS_FILE = "/sys/class/backlight/amdgpu_bl1/brightness"
 
 
 # Argument parser
@@ -63,6 +63,19 @@ class Brightness:
 
 # Main
 if __name__ == "__main__":
+	my_file = Path("/sys/class/backlight/amdgpu_bl0/brightness")
+	my_file2 = Path("/sys/class/backlight/amdgpu_bl1/brightness")
+	if my_file.is_file():
+		MAX_BRIGHTNESS_FILE = "/sys/class/backlight/amdgpu_bl0/max_brightness"
+		MAIN_BRIGHTNESS_FILE = "/sys/class/backlight/amdgpu_bl0/brightness"
+	elif my_file2.is_file():
+		MAX_BRIGHTNESS_FILE = "/sys/class/backlight/amdgpu_bl1/max_brightness"
+		MAIN_BRIGHTNESS_FILE = "/sys/class/backlight/amdgpu_bl1/brightness"
+	else:
+		MAX_BRIGHTNESS_FILE = "/sys/class/backlight/amdgpu_bl2/max_brightness"
+		MAIN_BRIGHTNESS_FILE = "/sys/class/backlight/amdgpu_bl2/brightness"
+		
+
 	args_parser = build_parser()
 	args = args_parser.parse_args()
 
