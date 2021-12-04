@@ -85,6 +85,10 @@ function rules:init(args)
 			properties = { tag = "Web"}
 		},
 		{
+			rule_any = { name = { "Picture-in-Picture"} },
+			properties = { above = true, maximized = false, sticky = true }
+		},
+		{
 			rule = { class = "URxvt" },
 			properties = { tag = "Terminal"}
 		},

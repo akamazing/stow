@@ -26,8 +26,8 @@ function autostart.run()
 	-- utils
 	awful.spawn.with_shell("compton")
 	awful.spawn.with_shell("nm-applet")
-	awful.spawn.with_shell("pavucontrol")
-
+	awful.spawn.with_shell("xscreensaver")
+	
 	-- apps
 	awful.spawn.with_shell("gpaste-client start")
 	awful.spawn.with_shell("firefox")

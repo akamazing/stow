@@ -102,10 +102,10 @@ function desktop:init(args)
 
 	disks.args = {
 		sensors  = {
+			{ meter_function = system.fs_info, maxm = 100, crit = 80, name = "boot", args = "/boot"        },
 			{ meter_function = system.fs_info, maxm = 100, crit = 80, name = "root", args = "/"            },
-			{ meter_function = system.fs_info, maxm = 100, crit = 80, name = "home", args = "/home"        },
-			{ meter_function = system.fs_info, maxm = 100, crit = 80, name = "misc", args = "/mnt/storage" },
-			{ meter_function = system.fs_info, maxm = 100, crit = 80, name = "data", args = "/mnt/media"   },
+			-- { meter_function = system.fs_info, maxm = 100, crit = 80, name = "misc", args = "/mnt/storage" },
+			-- { meter_function = system.fs_info, maxm = 100, crit = 80, name = "data", args = "/mnt/media"   },
 		},
 		timeout = 300
 	}
@@ -147,7 +147,7 @@ function desktop:init(args)
 
 	-- hdd
 	local thermald = { geometry = wgeometry(grid, places.thermald, workarea) }
-	local hdd_smart_check = system.simple_async("smartctl --attributes /dev/sda", "194.+%s(%d+)%s%(.+%)\r?\n")
+	local hdd_smart_check = system.simple_async("smartctl --attributes /dev/nvme0n1", "194.+%s(%d+)%s%(.+%)\r?\n")
 
 	thermald.args = {
 		sensors = { { async_function = hdd_smart_check, maxm = 60, crit = 45, name = "hdd" } },
@@ -159,7 +159,7 @@ function desktop:init(args)
 	-- gpu
 	local thermalg = { geometry = wgeometry(grid, places.thermalg, workarea) }
 	thermalg.args = {
-		sensors = { { async_function = system.thermal.nvoptimus, maxm = 105, crit = 80, name = "gpu" } },
+		sensors = { { async_function = system.thermal.nvsmi, maxm = 105, crit = 80, name = "gpu" } },
 		timeout = 10,
 	}
 

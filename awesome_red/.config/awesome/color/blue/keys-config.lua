@@ -767,10 +767,10 @@ function hotkeys:init(args)
 			{ description = "Switch titlebar view for all clients", group = "Titlebar" }
 		},
 
-		{
-			{ env.mod }, "e", function() redflat.float.player:show(rb_corner()) end,
-			{ description = "Show/hide widget", group = "Audio player" }
-		},
+		-- {
+		-- 	{ env.mod }, "e", function() redflat.float.player:show(rb_corner()) end,
+		-- 	{ description = "Show/hide widget", group = "Audio player" }
+		-- },
 		{
 			{}, "XF86AudioPlay", function() redflat.float.player:action("PlayPause") end,
 			{ description = "Play/Pause track", group = "Audio player" }
